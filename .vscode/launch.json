@@ -21,6 +21,7 @@
       "autoAttachChildProcesses": true,
       "sourceMaps": true,
       "smartStep": true,
+      "outputCapture": "std",
       "outFiles": [
         "${workspaceFolder}/.esbuild/.build/**/*.js"
       ]

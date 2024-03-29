@@ -1,5 +1,5 @@
-import type { AWS } from '@serverless/typescript';
-import infrastructure from './src/infrastructure/serverless';
+import type { AWS } from '@serverless/typescript'
+import infrastructure from './src/infrastructure/serverless'
 
 const serverlessConfiguration: AWS = {
   service: 'lol-tracker',
@@ -7,6 +7,7 @@ const serverlessConfiguration: AWS = {
   plugins: [
     'serverless-esbuild',
     'serverless-offline',
+    'serverless-iam-roles-per-function'
   ],
   provider: {
     name: 'aws',
@@ -14,18 +15,22 @@ const serverlessConfiguration: AWS = {
     stage: 'dev',
     region: 'us-east-1',
     memorySize: 128,
+    architecture: 'arm64',
+    versionFunctions: false,
+    logRetentionInDays: 7,
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
-    },
+      NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000'
+    }
   },
   functions: infrastructure.functions,
   resources: infrastructure.resources,
   custom: {
     esbuild: {
+      bundle: true,
       sourcemap: true
-    },
-  },
+    }
+  }
 }
 
-module.exports = serverlessConfiguration;
+module.exports = serverlessConfiguration

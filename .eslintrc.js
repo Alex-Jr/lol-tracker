@@ -3,7 +3,7 @@ module.exports = {
     es2021: true,
     node: true
   },
-  extends: ['standard-with-typescript', 'prettier'],
+  extends: ['standard-with-typescript'],
   overrides: [
     {
       env: {
@@ -14,6 +14,12 @@ module.exports = {
       ],
       parserOptions: {
         sourceType: 'script'
+      }
+    },
+    {
+      files: ['./src/infrastructure/serverless/**'],
+      rules: {
+        'no-template-curly-in-string': 'off'
       }
     }
   ],
