@@ -21,6 +21,12 @@ module.exports = {
         "no-template-curly-in-string": "off",
       },
     },
+    {
+      files: ["./tests/**"],
+      rules: {
+        "@typescript-eslint/unbound-method": "off",
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: "latest",

@@ -20,7 +20,7 @@ export class SavePlayerUseCase {
   }): Promise<void> {
     const riotID = new RiotID(gameName, tagLine);
 
-    const player = await this.playerRepository.findByRiotID(riotID.toString());
+    const player = await this.playerRepository.findByRiotID(riotID);
 
     if (player !== undefined) {
       throw new Error("Player already exists");

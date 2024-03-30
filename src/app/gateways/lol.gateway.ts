@@ -23,10 +23,12 @@ export class LOL implements LOLGateway {
 
       return puuid;
     } catch (error: any) {
+      if (error.response?.status === 404) {
+        return undefined;
+      }
+
       if ("toJSON" in error) {
         console.error(error.toJSON());
-
-        return undefined;
       }
 
       throw error;

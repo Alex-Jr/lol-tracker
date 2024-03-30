@@ -39,7 +39,15 @@ export class Player {
     );
   }
 
-  toJSON(): IPlayer {
-    return this.#props;
+  toJSON(): {
+    PUUID: string;
+    lastFetchedDate: string;
+    riotID: string;
+  } {
+    return {
+      PUUID: this.#props.PUUID,
+      lastFetchedDate: this.#props.lastFetchedDate.toISOString(),
+      riotID: this.#props.riotID.toString(),
+    };
   }
 }

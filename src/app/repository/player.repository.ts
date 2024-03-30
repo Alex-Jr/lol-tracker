@@ -60,8 +60,10 @@ export class DynamoDBPlayerRepository implements PlayerRepository {
     });
   }
 
-  async findByRiotID(riotID: string): Promise<Player | undefined> {
-    const queryResult = await PlayerModel.query("riotID").eq(riotID).exec();
+  async findByRiotID(riotID: RiotID): Promise<Player | undefined> {
+    const queryResult = await PlayerModel.query("riotID")
+      .eq(riotID.toString())
+      .exec();
 
     if (queryResult.length === 0) {
       return undefined;

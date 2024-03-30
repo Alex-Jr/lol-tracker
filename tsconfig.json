@@ -1,5 +1,11 @@
 {
-  "include": ["src/**/*", ".eslintrc.js", "serverless.ts"],
+  "include": [
+    "src/**/*", 
+    "tests/**/*",
+    "serverless.ts", 
+    ".eslintrc.js",
+    "jest.config.js"
+  ],
   //! this make build fails if its an array
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
