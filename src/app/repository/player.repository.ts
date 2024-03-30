@@ -1,10 +1,11 @@
-import dynamoose from "dynamoose";
-import { type PlayerRepository } from "../../interfaces/repositories/player.repository";
-import { Player } from "../entities/player.entity";
-import { RiotID } from "../valueObjects/riotID";
-import { type Item } from "dynamoose/dist/Item";
-import { captureAWSv3Client } from "aws-xray-sdk";
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
+import { captureAWSv3Client } from "aws-xray-sdk";
+import dynamoose from "dynamoose";
+import { type Item } from "dynamoose/dist/Item";
+
+import { Player } from "@/app/entities/player.entity";
+import { RiotID } from "@/app/valueObjects/riotID";
+import { type PlayerRepository } from "@/interfaces/repositories/player.repository";
 
 dynamoose.aws.ddb.set(captureAWSv3Client(new DynamoDB({})));
 

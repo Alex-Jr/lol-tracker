@@ -1,8 +1,8 @@
 import axios from "axios";
 
-import { type LOLGateway } from "../../interfaces/gateways/lol.gateway";
-import { xray } from "../decorators/xray.decorator";
-import { type RiotID } from "../valueObjects/riotID";
+import { xray } from "@/app/decorators/xray.decorator";
+import { RiotID } from "@/app/valueObjects/riotID";
+import { type LOLGateway } from "@/interfaces/gateways/lol.gateway";
 
 export class LOL implements LOLGateway {
   @xray

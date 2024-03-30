@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { LOL } from "../gateways/lol.gateway";
-import { DynamoDBPlayerRepository } from "../repository/player.repository";
-import { SavePlayerUseCase } from "../useCases/savePlayer.useCase";
+import { LOL } from "@/app/gateways/lol.gateway";
+import { DynamoDBPlayerRepository } from "@/app/repository/player.repository";
+import { SavePlayerUseCase } from "@/app/useCases/savePlayer.useCase";
 
 const playerRepository = new DynamoDBPlayerRepository();
 const lolGateway = new LOL();

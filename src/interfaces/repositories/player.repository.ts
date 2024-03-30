@@ -1,4 +1,4 @@
-import { type Player } from "../../app/entities/player.entity";
+import { type Player } from "@/app/entities/player.entity";
 
 export interface PlayerRepository {
   findByPUUID: (PUUID: string) => Promise<Player | undefined>;

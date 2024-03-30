@@ -1,5 +1,6 @@
 import type { AWS } from "@serverless/typescript";
 
+// eslint-disable-next-line no-restricted-imports
 import infrastructure from "./src/infrastructure/serverless";
 
 const serverlessConfiguration: AWS = {
@@ -29,7 +30,6 @@ const serverlessConfiguration: AWS = {
   resources: infrastructure.resources,
   custom: {
     esbuild: {
-      bundle: true,
       sourcemap: true,
     },
   },

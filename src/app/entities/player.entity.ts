@@ -1,4 +1,4 @@
-import { type RiotID } from "../valueObjects/riotID";
+import { type RiotID } from "@/app/valueObjects/riotID";
 
 interface IPlayer {
   PUUID: string;

@@ -1,8 +1,8 @@
-import { type LOLGateway } from "../../interfaces/gateways/lol.gateway";
-import { type PlayerRepository } from "../../interfaces/repositories/player.repository";
-import { xray } from "../decorators/xray.decorator";
-import { Player } from "../entities/player.entity";
-import { RiotID } from "../valueObjects/riotID";
+import { xray } from "@/app/decorators/xray.decorator";
+import { Player } from "@/app/entities/player.entity";
+import { RiotID } from "@/app/valueObjects/riotID";
+import { type LOLGateway } from "@/interfaces/gateways/lol.gateway";
+import { type PlayerRepository } from "@/interfaces/repositories/player.repository";
 
 export class SavePlayerUseCase {
   constructor(
