@@ -1,45 +1,45 @@
-import { type RiotID } from '../valueObjects/riotID'
+import { type RiotID } from "../valueObjects/riotID";
 
 interface IPlayer {
-  PUUID: string
-  lastFetchedDate: Date
-  riotID: RiotID
+  PUUID: string;
+  lastFetchedDate: Date;
+  riotID: RiotID;
 }
 
 export class Player {
-  readonly #props: IPlayer
+  readonly #props: IPlayer;
 
-  constructor (
-    props: {
-      PUUID: string
-      lastFetchedDate?: Date
-      riotID: RiotID
-    }
-  ) {
+  constructor(props: {
+    PUUID: string;
+    lastFetchedDate?: Date;
+    riotID: RiotID;
+  }) {
     this.#props = {
       PUUID: props.PUUID,
-      lastFetchedDate: props.lastFetchedDate ?? new Date('2021-06-16'),
-      riotID: props.riotID
-    }
+      lastFetchedDate: props.lastFetchedDate ?? new Date("2021-06-16"),
+      riotID: props.riotID,
+    };
   }
 
-  get PUUID (): string {
-    return this.#props.PUUID
+  get PUUID(): string {
+    return this.#props.PUUID;
   }
 
-  get lastFetchedDate (): Date {
-    return this.#props.lastFetchedDate
+  get lastFetchedDate(): Date {
+    return this.#props.lastFetchedDate;
   }
 
-  get riotID (): RiotID {
-    return this.#props.riotID
+  get riotID(): RiotID {
+    return this.#props.riotID;
   }
 
-  incrementLastFetchedDate (): void {
-    this.#props.lastFetchedDate.setDate(this.#props.lastFetchedDate.getDate() + 1)
+  incrementLastFetchedDate(): void {
+    this.#props.lastFetchedDate.setDate(
+      this.#props.lastFetchedDate.getDate() + 1,
+    );
   }
 
-  toJSON (): IPlayer {
-    return this.#props
+  toJSON(): IPlayer {
+    return this.#props;
   }
 }
