@@ -4,6 +4,7 @@ const lambda: NonNullable<AWS['functions']>[string] = {
   handler: 'src/app/handlers/savePlayer.default',
   reservedConcurrency: 1,
   timeout: 10,
+  tracing: 'Active',
   environment: {
     PLAYER_TABLE_NAME: {
       Ref: 'PlayerTable'
@@ -12,6 +13,7 @@ const lambda: NonNullable<AWS['functions']>[string] = {
   },
   // @ts-expect-error using plugin serverless-iam-roles-per-function
   iamRoleStatements: [
+    // DynamoDB player table
     {
       Effect: 'Allow',
       Action: [
@@ -40,7 +42,20 @@ const lambda: NonNullable<AWS['functions']>[string] = {
             ]
           ]
         }
+
       ]
+    },
+    // X-Ray
+    {
+      Effect: 'Allow',
+      Action: [
+        'xray:PutTraceSegments',
+        'xray:PutTelemetryRecords',
+        'xray:GetSamplingRules',
+        'xray:GetSamplingTargets',
+        'xray:GetSamplingStatisticSummaries'
+      ],
+      Resource: '*'
     }
   ]
 }

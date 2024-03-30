@@ -1,5 +1,6 @@
 import { type LOLGateway } from '../../interfaces/gateways/lol.gateway'
 import { type PlayerRepository } from '../../interfaces/repositories/player.repository'
+import { xray } from '../decorators/xray.decorator'
 import { Player } from '../entities/player.entity'
 import { RiotID } from '../valueObjects/riotID'
 
@@ -10,6 +11,7 @@ export class SavePlayerUseCase {
   ) {
   }
 
+  @xray
   async execute ({
     gameName,
     tagLine

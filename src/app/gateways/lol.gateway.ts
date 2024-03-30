@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { type LOLGateway } from '../../interfaces/gateways/lol.gateway'
 import { type RiotID } from '../valueObjects/riotID'
+import { xray } from '../decorators/xray.decorator'
 
 export class LOL implements LOLGateway {
+  @xray
   async getPUUIDbyRiotID (riotID: RiotID): Promise<string | undefined> {
     try {
       const { data: { puuid } } = await axios.get<{

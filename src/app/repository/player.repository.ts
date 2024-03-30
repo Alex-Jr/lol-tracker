@@ -1,8 +1,14 @@
-import { model } from 'dynamoose'
+import dynamoose from 'dynamoose'
 import { type PlayerRepository } from '../../interfaces/repositories/player.repository'
 import { Player } from '../entities/player.entity'
 import { RiotID } from '../valueObjects/riotID'
 import { type Item } from 'dynamoose/dist/Item'
+import { captureAWSv3Client } from 'aws-xray-sdk'
+import { DynamoDB } from '@aws-sdk/client-dynamodb'
+
+dynamoose.aws.ddb.set(
+  captureAWSv3Client(new DynamoDB({}))
+)
 
 interface IPlayerModel extends Item {
   PUUID: string
@@ -10,7 +16,7 @@ interface IPlayerModel extends Item {
   riotID: string
 }
 
-const PlayerModel = model<IPlayerModel>('Player', {
+const PlayerModel = dynamoose.model<IPlayerModel>('Player', {
   PUUID: {
     type: String,
     required: true

@@ -20,7 +20,8 @@ const serverlessConfiguration: AWS = {
     logRetentionInDays: 7,
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000'
+      NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      AWS_XRAY_CONTEXT_MISSING: 'IGNORE_ERROR'
     }
   },
   functions: infrastructure.functions,

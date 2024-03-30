@@ -29,6 +29,8 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.540.0",
+    "aws-xray-sdk": "^3.6.0",
     "axios": "^1.6.8",
     "dynamoose": "^4.0.0",
     "zod": "^3.22.4"
