@@ -5,7 +5,7 @@ import { type Item } from "dynamoose/dist/Item";
 
 import { Player } from "@/app/entities/player.entity";
 import { RiotID } from "@/app/valueObjects/riotID";
-import { type PlayerRepository } from "@/interfaces/repositories/player.repository";
+import { type IPlayerRepository } from "@/interfaces/repositories/player.repository";
 
 dynamoose.aws.ddb.set(captureAWSv3Client(new DynamoDB({})));
 
@@ -43,7 +43,7 @@ const PlayerModel = dynamoose.model<IPlayerModel>(
   },
 );
 
-export class DynamoDBPlayerRepository implements PlayerRepository {
+export class DynamoDBPlayerRepository implements IPlayerRepository {
   async findByPUUID(ID: string): Promise<Player | undefined> {
     const player = await PlayerModel.get(ID);
 

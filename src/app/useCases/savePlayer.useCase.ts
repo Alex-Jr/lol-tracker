@@ -1,13 +1,15 @@
 import { xray } from "@/app/decorators/xray.decorator";
 import { Player } from "@/app/entities/player.entity";
 import { RiotID } from "@/app/valueObjects/riotID";
-import { type LOLGateway } from "@/interfaces/gateways/lol.gateway";
-import { type PlayerRepository } from "@/interfaces/repositories/player.repository";
+import { type ILOLAPIGateway } from "@/interfaces/gateways/lol.api.gateway";
+import { type IProcessQueueGateway } from "@/interfaces/gateways/process.queue.gateway";
+import { type IPlayerRepository } from "@/interfaces/repositories/player.repository";
 
 export class SavePlayerUseCase {
   constructor(
-    private readonly gateway: LOLGateway,
-    private readonly playerRepository: PlayerRepository,
+    private readonly gateway: ILOLAPIGateway,
+    private readonly playerRepository: IPlayerRepository,
+    private readonly processQueueGateway: IProcessQueueGateway,
   ) {}
 
   @xray
@@ -20,7 +22,7 @@ export class SavePlayerUseCase {
   }): Promise<void> {
     const riotID = new RiotID(gameName, tagLine);
 
-    const player = await this.playerRepository.findByRiotID(riotID);
+    let player = await this.playerRepository.findByRiotID(riotID);
 
     if (player !== undefined) {
       throw new Error("Player already exists");
@@ -32,11 +34,21 @@ export class SavePlayerUseCase {
       throw new Error("Player not found");
     }
 
-    await this.playerRepository.save(
-      new Player({
-        PUUID,
-        riotID,
-      }),
+    player = new Player({
+      PUUID,
+      riotID,
+    });
+
+    await this.playerRepository.save(player);
+
+    await this.processQueueGateway.sendBatch(
+      // get how many days have passed since 2021-06-16
+      Array.from({
+        length: Math.floor((Date.now() - 1623812400000) / 86400000),
+      }).map((_, i) => ({
+        date: new Date(1623812400000 + i * 86400000),
+        player,
+      })),
     );
   }
 }

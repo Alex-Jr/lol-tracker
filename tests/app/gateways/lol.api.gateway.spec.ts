@@ -1,15 +1,15 @@
 import axios from "axios";
 
+import { LOLAPIGateway } from "@/app/gateways/lol.api.gateway";
+import { RiotID } from "@/app/valueObjects/riotID";
+
 jest.mock("axios");
 
 const MockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("LolGateway", () => {
   it("should return the puuid when the request is successful", async () => {
-    const { LOL } = await import("@/app/gateways/lol.gateway");
-    const { RiotID } = await import("@/app/valueObjects/riotID");
-
-    const lol = new LOL();
+    const lol = new LOLAPIGateway();
 
     MockedAxios.get.mockResolvedValueOnce({
       data: {
@@ -23,10 +23,7 @@ describe("LolGateway", () => {
   });
 
   it("should return undefined when the request fails with status 404", async () => {
-    const { LOL } = await import("@/app/gateways/lol.gateway");
-    const { RiotID } = await import("@/app/valueObjects/riotID");
-
-    const lol = new LOL();
+    const lol = new LOLAPIGateway();
 
     MockedAxios.get.mockRejectedValueOnce({
       response: {
@@ -40,10 +37,7 @@ describe("LolGateway", () => {
   });
 
   it("should throw an error when the request fails with an unknown error", async () => {
-    const { LOL } = await import("@/app/gateways/lol.gateway");
-    const { RiotID } = await import("@/app/valueObjects/riotID");
-
-    const lol = new LOL();
+    const lol = new LOLAPIGateway();
 
     MockedAxios.get.mockRejectedValueOnce(new Error("Unknown error"));
 
@@ -53,10 +47,7 @@ describe("LolGateway", () => {
   });
 
   it("should log the error when the error has a toJSON method", async () => {
-    const { LOL } = await import("@/app/gateways/lol.gateway");
-    const { RiotID } = await import("@/app/valueObjects/riotID");
-
-    const lol = new LOL();
+    const lol = new LOLAPIGateway();
 
     class ErrorWithToJSON extends Error {
       toJSON(): string {

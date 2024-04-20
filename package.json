@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.540.0",
+    "@aws-sdk/client-sqs": "^3.556.0",
     "aws-xray-sdk": "^3.6.0",
     "axios": "^1.6.8",
     "dynamoose": "^4.0.0",

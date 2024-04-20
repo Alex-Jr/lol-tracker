@@ -10,6 +10,9 @@ const lambda: NonNullable<AWS["functions"]>[string] = {
       Ref: "PlayerTable",
     },
     RIOT_API_KEY: "RGAPI-d9b42c50-5d30-4609-a1ef-ef2e18bc4d47",
+    PROCESS_QUEUE_URL: {
+      Ref: "ProcessQueue",
+    },
   },
   // @ts-expect-error using plugin serverless-iam-roles-per-function
   iamRoleStatements: [

@@ -13,9 +13,9 @@
         "invoke",
         "local",
         "-f",
-        "${fileBasenameNoExtension}",
+        "${input:lambda-name}",
         "-p",
-        "src/app/mocks/${fileBasenameNoExtension}.json",
+        "src/app/mocks/${input:lambda-name}.json",
         "--verbose"
       ],
       "autoAttachChildProcesses": true,
@@ -24,6 +24,16 @@
       "outputCapture": "std",
       "outFiles": [
         "${workspaceFolder}/.esbuild/.build/**/*.js"
+      ],
+    }
+  ],
+  "inputs": [
+    {
+      "id": "lambda-name",
+      "type": "pickString",
+      "description": "Choose the lambda to run",
+      "options": [
+        "save-player",
       ]
     }
   ]

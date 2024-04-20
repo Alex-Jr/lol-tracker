@@ -17,7 +17,9 @@ const output: {
 const functionsDir = readdirSync(join(__dirname, "functions"));
 
 functionsDir.forEach((file) => {
-  const functionName = file.split(".")[0];
+  const functionName = file
+    .split(".")[0]
+    .replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
 
   output.functions[functionName] = require(
     join(__dirname, "functions", file),

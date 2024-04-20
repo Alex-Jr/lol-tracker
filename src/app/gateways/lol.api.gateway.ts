@@ -2,9 +2,9 @@ import axios from "axios";
 
 import { xray } from "@/app/decorators/xray.decorator";
 import { RiotID } from "@/app/valueObjects/riotID";
-import { type LOLGateway } from "@/interfaces/gateways/lol.gateway";
+import { type ILOLAPIGateway } from "@/interfaces/gateways/lol.api.gateway";
 
-export class LOL implements LOLGateway {
+export class LOLAPIGateway implements ILOLAPIGateway {
   @xray
   async getPUUIDbyRiotID(riotID: RiotID): Promise<string | undefined> {
     try {
